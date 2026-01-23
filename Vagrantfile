@@ -12,13 +12,16 @@ Vagrant.configure("2") do |config|
          vb.name = "controle"
          vb.gui = false
         end
-      
       controle.vm.provision "ansible_local" do |ansible| 
         ansible.playbook = "playbook.yml"
         ansible.install_mode = "pip"
       end
-      end 
+      controle.vm.provision "ansible_local" do |ansible|
+	  ansible.playbook = "installdocker.yml"
+	  ansible.install_mode = "pip"
+ end 
 
+end
   config.vm.define "web" do |web|
     web.vm.box = "shekeriev/debian-11"
     web.vm.hostname = "web"
@@ -42,4 +45,3 @@ Vagrant.configure("2") do |config|
   end
 
 end
-
